@@ -1,1 +1,1 @@
-# face_detection_backend
+#face detection backed project using sequelize orm tool.
