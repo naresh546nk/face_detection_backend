@@ -5,8 +5,7 @@ import connection from "../db.config.js";
 const User=connection.define('user', {
     id: {
 		type: Sequelize.UUID,
-		defaultValue: Sequelize.UUIDV1,
-		primaryKey: true
+		defaultValue: Sequelize.UUIDV1
 	  },
 	  name: {
 		type: Sequelize.STRING,
@@ -14,7 +13,7 @@ const User=connection.define('user', {
 	  },
 	  email: {
         type: Sequelize.STRING,
-        unique: true,
+		primaryKey: true,
         validate : {
             isEmail: true
             }
@@ -27,7 +26,8 @@ const User=connection.define('user', {
 
       },
       entries:{
-          type: Sequelize.INTEGER
+          type: Sequelize.INTEGER,
+          defaultValue:0
 
       }
 	});

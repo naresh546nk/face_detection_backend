@@ -27,8 +27,8 @@ connection.sync({alter: true}).then(() => {
 
 
 
-User.hasOne(Login ,{foreignKey: 'fk_email' ,targetKey: 'email'})
-Login.belongsTo(User , {foreignKey: 'fk_email' ,targetKey: 'email'})
+User.hasOne(Login ,{foreignKey: 'email' ,targetKey: 'email'})
+Login.belongsTo(User , {foreignKey: 'email' ,targetKey: 'email'})
 
 // db.address.belongsTo(db.customers, {foreignKey: 'fk_customerid', targetKey: 'uuid'});
 // db.customers.hasOne(db.address, {foreignKey: 'fk_customerid', targetKey: 'uuid'});
