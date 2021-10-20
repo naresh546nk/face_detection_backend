@@ -1,6 +1,7 @@
 import connection from '../db.config.js'
 import User from '../models/User.js'
 import Login from '../models/Login.js';
+import bcrypt from 'bcrypt'
 
 
  export  const  addUser= async (req,res)=>{
@@ -42,16 +43,27 @@ import Login from '../models/Login.js';
     }
     
 export const userLogin=async (req,res)=>{
-        const result= await Login.findOne({where : {email: req.body.email, password: req.body.password}})
+        //const result= await Login.findOne({where : {email: req.body.email, password: req.body.password}})
+        const result = await Login.findByPk(req.body.email)
         if(result===null){
             res.json({
                 message:"Sorry wrong credential  !"
             })
         }else{
-            res.json({
-                message: "User validated !",
-                result: result
-            })
+           const valid= await bcrypt.compare(req.body.password, result.password);
+           console.log("==========================================================================")
+           console.log("password validation : ",valid)
+            if(valid){
+                res.json({
+                    message: "User validated !",
+                    result: await User.findByPk(req.body.email)
+                })
+
+            }else{
+                res.json({
+                    message:"Sorry wrong credential  !"
+                })
+            }
         }
     }
     
