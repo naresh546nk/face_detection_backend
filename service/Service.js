@@ -14,7 +14,8 @@ import bcrypt from 'bcrypt'
                
                 name: req.body.name,
                 email: req.body.email,
-                gender: req.body.gender
+                gender: req.body.gender,
+                country: req.body.country
             },{transaction: t})
     
             const login=await Login.create({
@@ -35,7 +36,7 @@ import bcrypt from 'bcrypt'
             console.log(error)
             t.rollback();
             res.json({
-                message:"failed !",
+                message:"failed",
                 error: error
             })
     
@@ -47,12 +48,11 @@ export const userLogin=async (req,res)=>{
         const result = await Login.findByPk(req.body.email)
         if(result===null){
             res.json({
-                message:"Sorry wrong credential  !"
+                message:"Sorry wrong credential  !",
+                result:null
             })
         }else{
            const valid= await bcrypt.compare(req.body.password, result.password);
-           console.log("==========================================================================")
-           console.log("password validation : ",valid)
             if(valid){
                 res.json({
                     message: "User validated !",
@@ -61,10 +61,36 @@ export const userLogin=async (req,res)=>{
 
             }else{
                 res.json({
-                    message:"Sorry wrong credential  !"
+                    message:"Sorry wrong credential  !",
+                    result: null
                 })
             }
         }
     }
     
+
+    export const setRank= async (req, res)=>{
+        //console.log(req.query.email)
+        const result= await User.findByPk(req.query.email)
+        console.log(result.entries)
+
+        const rank= await User.update({entries:result.entries+1},{where: {email: req.query.email}})
+        //console.log(rank)
+
+        res.json({
+            message:"Rank update successfully !",
+            rank: (result.entries+1) 
+        })
+
+    }
+
+    export const getRank= async (req, res)=> {
+        const result= await User.findByPk(req.query.email)
+        console.log(result.entries);
+
+        res.json({
+            message: "ok",
+            rank: result.entries
+        })
+    }
     

@@ -25,6 +25,10 @@ const User=connection.define('user', {
           }
 
       },
+      countery:{
+      	type: Sequelize.STRING,
+      	defaultValue:'India'
+      },
       entries:{
           type: Sequelize.INTEGER,
           defaultValue:0

@@ -1,18 +1,22 @@
 import connection from './db.config.js'
+import env from './env.js'
 import Express from 'express'
 import bodyParser from 'body-parser'
 import Router from './router/Router.js'
 import User from './models/User.js';
 import Login from './models/Login.js';
+import cors from 'cors'
 
 
 const app=Express()
 app.use(bodyParser.json())
 const parser=bodyParser.urlencoded({ extended: false })
 app.use(parser);
+app.use(cors())
+
 const router=Router(app,parser)
 
-const PORT=8081
+const PORT=env.PORT;
 
 
 

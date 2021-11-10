@@ -1,7 +1,8 @@
 import mysql from 'mysql'
 
 const env={
-	database:'nodesql',
+	PORT:3001,
+	database:'smart-brain',
 	username:'root',
 	password:'',
 	host:'localhost',
