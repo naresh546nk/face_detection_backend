@@ -1,4 +1,4 @@
-import {addUser, userLogin, setRank , getRank} from '../service/Service.js'
+import {addUser, userLogin, setRank , getRank,getMessage} from '../service/Service.js'
 
 const Router=(app, parser)=>{
 
@@ -6,6 +6,7 @@ const Router=(app, parser)=>{
     app.post('/login', userLogin)
     app.get('/setRank', setRank)
     app.get('/getRank', getRank)
+    app.get('/', getMessage)
 
 }
 export default Router;

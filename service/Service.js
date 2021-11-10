@@ -94,3 +94,7 @@ export const userLogin=async (req,res)=>{
         })
     }
     
+   export const getMessage=  (req, res)=> {
+        console.log("server started.")
+        res.send('Hello word !')
+    }
