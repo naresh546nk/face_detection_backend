@@ -16,7 +16,7 @@ app.use(cors())
 
 const router=Router(app,parser)
 
-const PORT=env.PORT||30001;
+const PORT=process.env.PORT||30001;
 
 
 
